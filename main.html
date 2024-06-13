@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Going to Boston</title>
+</head>
+<body>
+    <div id="app" style="background-color: rgb(251, 238, 249);">
+        <div id="Text" style="text-align: center">
+            <h1>Going to Boston</h1>
+        </div>
+        <label for="p1Name">Player 1's Name: </label>
+        <input type="text" id="p1Name" v-model="p1Name">
+        <br>
+
+        <label for="p2Name">Player 2's Name: </label>
+        <input type="text" id="p2Name" v-model="p2Name">
+        <br>
+
+        <label for="rounds">Choose the Number of rounds you'd like to play:</label>
+        <input type="text" id="totalrounds" class="totalrounds" v-model="totalrounds" :disabled="gameStarted">
+        <button type="button" id="submitBtn" v-on:click="submitRounds" :disabled="gameStarted || submitDisabled">Submit</button>
+        <br>
+
+        <span id="error" style="display:none">Invalid number of rounds.</span>
+        <br><br>
+        <button id="rollFirstBtn" v-on:click="decideFirst" :disabled="firstButtonDisabled">Roll for who goes first.</button>
+        <span id="firstInfo" class="first_info"><br>{{ firstInfo }}</span>
+        
+        <h2>Game Stats</h2>
+        <span id="currentRound">Round: {{ currentRound }} / {{ totalrounds }}</span><br>
+        <span id="player1RoundsWon">{{p1Name}}'s Round wins: {{ player1RoundsWon }}</span><br>
+        <span id="player2RoundsWon">{{p2Name}}'s Round wins: {{ player2RoundsWon }}</span><br>
+        <span id="turn" class="turn">Turn: Player {{ turn }}</span><br>
+        <span id="player1Score">{{p1Name}}'s score: {{ finalRollCount1 }}</span><br>
+        <span id="player2Score">{{p2Name}}'s score: {{ finalRollCount2 }}</span><br><br>
+        <button id="rollBtn" v-on:click="roll" :disabled="rollDisabled">Roll</button><br><br>
+        <span id="instruction" v-bind:class="{ 'hidden instruction': !showInstruction }">Roll!</span><br>
+        <span id="dice" class="dice">Dice: {{ dice1 }}, {{ dice2 }}, {{ dice3 }}</span><br><br>
+        <span id="finalRollCount1">{{p1Name}}'s Round Sum: {{ player1Score }}</span><br><br>
+        <span id="finalRollCount2">{{p2Name}}'s Round Sum: {{ player2Score }}</span><br><br>
+        <button id="calculateScoreBtn" v-on:click="calculateScore" :disabled="calcDisabled">The final score is...</button><br><br>
+        <span id="result">{{ result }}</span><br><br>
+        <button id="newGameBtn" @click="replayGame">New Game</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
